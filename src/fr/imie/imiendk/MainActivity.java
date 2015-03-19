@@ -56,7 +56,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        
+
         btC = (Button) this.findViewById(R.id.buttonC);
         btC.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,17 +66,17 @@ public class MainActivity extends Activity {
                 String text;
                 long time;
                 int[] tabInt;
-                
+
                 etNumber = (EditText) findViewById(R.id.number);
                 tvListNumbers = (TextView) findViewById(R.id.listNumbers);
-                
+
                 text = etNumber.getText().toString();
                 nb = Integer.parseInt(text);
-                
+
                 test = checkPrime(nb);
                 Toast.makeText(getApplicationContext(),test
                         , Toast.LENGTH_SHORT).show();
-                
+
                 time = System.currentTimeMillis();
                 tabInt = getAllPrimes(nb);
                 tvListNumbers.setText(Arrays.toString(tabInt).replace("[", "").replace("]", ""));
@@ -85,7 +85,7 @@ public class MainActivity extends Activity {
                         , Toast.LENGTH_SHORT).show();
             }
         });
-        
+
         btJava = (Button) this.findViewById(R.id.buttonJava);
         btJava.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,14 +96,14 @@ public class MainActivity extends Activity {
                 int nb;
                 etNumber = (EditText) findViewById(R.id.number);
                 tvListNumbers = (TextView) findViewById(R.id.listNumbers);
-                
+
                 text = etNumber.getText().toString();
                 nb = Integer.parseInt(text);
-                
+
                 test=checkPrimeJava(nb);
                 Toast.makeText(getApplicationContext(),test
                         , Toast.LENGTH_SHORT).show();
-                
+
                 time = System.currentTimeMillis();
                 tvListNumbers.setText(getAllPrimesJava(nb));
                 time=System.currentTimeMillis()-time;
@@ -149,22 +149,31 @@ public class MainActivity extends Activity {
         }
         return "Est un nombre premier";
     }
-    
+
     /**
      * Get all primes numbers between 0 and nb.
      * @param nb check number.
      * @return List of all primes numbers between 0 and nb.
      */
     private String getAllPrimesJava(int nb){
+        int i,j;
+        int test;
         String result="";
-        int i;
+
         i=2;
-        while(i<nb){
-            if(nb%i==0){
+        while(i<=nb){
+            test=0;
+            for(j=2;j<=i-1;j++){
+                if(i%j==0){
+                    test=1;
+                    break;
+                }
+            }
+            if(test==0){
                 if(result!=""){
                     result+=", ";
                 }
-                result+=String.valueOf(i);
+                result+=String.valueOf(j);
             }
             i++;
         }
