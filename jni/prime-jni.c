@@ -9,11 +9,11 @@ JNIEXPORT jstring JNICALL Java_fr_imie_imiendk_MainActivity_checkPrime(JNIEnv *e
 
 	int i,j;
 	if(nb == 1 || nb == 0)
-		return (*env)->NewStringUTF(env, "N'est un nombre premier");
+		return (*env)->NewStringUTF(env, "N'est pas un nombre premier");
 	i=2;
 	while(i<nb){
 		if(nb%i==0){
-			return (*env)->NewStringUTF(env, "N'est un nombre premier");
+			return (*env)->NewStringUTF(env, "N'est pas un nombre premier");
 		}
 		i++;
 	}
@@ -30,7 +30,7 @@ JNIEXPORT jintArray  JNICALL Java_fr_imie_imiendk_MainActivity_getAllPrimes(JNIE
 	i=2;
 	while(i<=nb){
 		test=0;
-		for(j=2;j<=i-1;j++){
+		for(j=2;j<i;j++){
 			if(i%j==0){
 				test=1;
 				break;
@@ -51,8 +51,10 @@ JNIEXPORT jintArray  JNICALL Java_fr_imie_imiendk_MainActivity_getAllPrimes(JNIE
 	if(sizeof(tabInt)!=0){
 		result = (*env)->NewIntArray(env, size);
 		(*env)->SetIntArrayRegion(env, result, 0, size, tabInt);
+		free(tabInt);
 		return result;
 	}else{
+		free(tabInt);
 		return NULL;
 	}
 

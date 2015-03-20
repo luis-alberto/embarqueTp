@@ -71,18 +71,20 @@ public class MainActivity extends Activity {
                 tvListNumbers = (TextView) findViewById(R.id.listNumbers);
 
                 text = etNumber.getText().toString();
-                nb = Integer.parseInt(text);
+                if(!text.isEmpty()){
+                    nb = Integer.parseInt(text);
 
-                test = checkPrime(nb);
-                Toast.makeText(getApplicationContext(),test
-                        , Toast.LENGTH_SHORT).show();
+                    test = checkPrime(nb);
+                    Toast.makeText(getApplicationContext(),test
+                            , Toast.LENGTH_SHORT).show();
 
-                time = System.currentTimeMillis();
-                tabInt = getAllPrimes(nb);
-                tvListNumbers.setText(Arrays.toString(tabInt).replace("[", "").replace("]", ""));
-                time=System.currentTimeMillis()-time;
-                Toast.makeText(getApplicationContext(),"Time: "+time+" ms"
-                        , Toast.LENGTH_SHORT).show();
+                    time = System.currentTimeMillis();
+                    tabInt = getAllPrimes(nb);
+                    tvListNumbers.setText(Arrays.toString(tabInt).replace("[", "").replace("]", ""));
+                    time=System.currentTimeMillis()-time;
+                    Toast.makeText(getApplicationContext(),"Time: "+time+" ms"
+                            , Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -98,17 +100,19 @@ public class MainActivity extends Activity {
                 tvListNumbers = (TextView) findViewById(R.id.listNumbers);
 
                 text = etNumber.getText().toString();
-                nb = Integer.parseInt(text);
+                if(!text.isEmpty()){
+                    nb = Integer.parseInt(text);
 
-                test=checkPrimeJava(nb);
-                Toast.makeText(getApplicationContext(),test
-                        , Toast.LENGTH_SHORT).show();
+                    test=checkPrimeJava(nb);
+                    Toast.makeText(getApplicationContext(),test
+                            , Toast.LENGTH_SHORT).show();
 
-                time = System.currentTimeMillis();
-                tvListNumbers.setText(getAllPrimesJava(nb));
-                time=System.currentTimeMillis()-time;
-                Toast.makeText(getApplicationContext(),"Time: "+time+" ms"
-                        , Toast.LENGTH_SHORT).show();
+                    time = System.currentTimeMillis();
+                    tvListNumbers.setText(getAllPrimesJava(nb));
+                    time=System.currentTimeMillis()-time;
+                    Toast.makeText(getApplicationContext(),"Time: "+time+" ms"
+                            , Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -139,11 +143,11 @@ public class MainActivity extends Activity {
     private String checkPrimeJava(int nb){
         int i;
         if(nb == 1 || nb == 0)
-            return "N'est un nombre premier";
+            return "N'est pas un nombre premier";
         i=2;
         while(i<nb){
             if(nb%i==0){
-                return "N'est un nombre premier";
+                return "N'est pas un nombre premier";
             }
             i++;
         }
